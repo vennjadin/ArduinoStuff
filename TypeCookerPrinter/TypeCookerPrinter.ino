@@ -1,15 +1,15 @@
-#include "Adafruit_Thermal.h"
+#include <Adafruit_Thermal.h>
 
-#include "tc_01.h"
-#include "tc_02.h"
-#include "tc_04.h"
-#include "tc_06.h"
-#include "tc_08.h"
+//#include "tc_01.h"
+//#include "tc_02.h"
+//#include "tc_04.h"
+//#include "tc_06.h"
+//#include "tc_08.h"
 
 // Here's the new syntax when using SoftwareSerial (e.g. Arduino Uno) ----
 // If using hardware serial instead, comment out or remove these lines:
 
-#include "SoftwareSerial.h"
+#include <SoftwareSerial.h>
 #define TX_PIN 6 // Arduino transmit  YELLOW WIRE  labeled RX on printer
 #define RX_PIN 5 // Arduino receive   GREEN WIRE   labeled TX on printer
 
@@ -37,7 +37,7 @@ void setup() {
   //Serial1.begin(19200); // Use this instead if using hardware serial
   printer.begin();        // Init printer (same regardless of serial type)
   //start serial connection
-  //Serial.begin(9600);
+  Serial.begin(9600);
   //configure pin2 as an input and enable the internal pull-up resistor
   pinMode(2, INPUT_PULLUP);
   pinMode(13, OUTPUT);
@@ -48,7 +48,7 @@ void loop() {
   //read the pushbutton value into a variable
   int sensorVal = digitalRead(2);
   //print out the value of the pushbutton
-  //Serial.println(sensorVal);
+  Serial.println(sensorVal);
 
   // Keep in mind the pullup means the pushbutton's
   // logic is inverted. It goes HIGH when it's open,
@@ -57,11 +57,11 @@ void loop() {
   if (sensorVal == LOW) {
     digitalWrite(13, LOW);
   int image = random(5);
-  if (image == 0) printer.printBitmap(tc1_width, tc1_height, tc1_data);
-  if (image == 1) printer.printBitmap(tc_02_width, tc_02_height, tc_02_data);
-  if (image == 2) printer.printBitmap(tc_04_width, tc_04_height, tc_04_data);
-  if (image == 3) printer.printBitmap(tc_06_width, tc_06_height, tc_06_data);
-  if (image == 4) printer.printBitmap(tc_08_width, tc_08_height, tc_08_data);
+  //if (image == 0) printer.printBitmap(tc1_width, tc1_height, tc1_data);
+  //if (image == 1) printer.printBitmap(tc_02_width, tc_02_height, tc_02_data);
+  //if (image == 2) printer.printBitmap(tc_04_width, tc_04_height, tc_04_data);
+  //if (image == 3) printer.printBitmap(tc_06_width, tc_06_height, tc_06_data);
+  //if (image == 4) printer.printBitmap(tc_08_width, tc_08_height, tc_08_data);
   
   printer.println(F(" "));
   printer.justify('C');
@@ -69,7 +69,7 @@ void loop() {
   printer.setSize('M');        // Set type size, accepts 'S', 'M', 'L'
   printer.println(F("Type]Media "));
 
-  printer.println(F("TypeCooker @ Open Day 2017"));
+  printer.println(F("TypeCooker @ Open Day 2022"));
   printer.boldOff();
   
   printer.justify('L');
